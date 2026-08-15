@@ -6,6 +6,22 @@ The algorithm is designed as a research reference for rugged benchmark functions
 
 > Status: reference implementation with tests and a benchmark harness. Do not claim universal superiority without repeated runs across dimensions, seeds, budgets, and statistical tests.
 
+## Benchmark snapshot
+
+The packaged smoke benchmark below compares Simulated Annealing, Particle Swarm Optimization, and PathWoven Inside DCGO on Michalewicz. The plotted score is `-best objective`, so higher is better.
+
+![PathWoven-DCGO benchmark snapshot](docs/assets/smoke_benchmark.svg)
+
+Smoke result from the installed package:
+
+| Method | Runs | Mean best objective | Score shown above |
+|---|---:|---:|---:|
+| Simulated Annealing | 3 | -1.60627 | 1.606 |
+| Particle Swarm Optimization | 3 | -3.89602 | 3.896 |
+| PathWoven Inside DCGO | 3 | -4.04754 | 4.048 |
+
+For serious claims, run the full benchmark matrix with more seeds, dimensions, and iteration budgets.
+
 ## Core idea
 
 ```text
@@ -37,7 +53,7 @@ z = 2\frac{x-l}{u-l} - 1
 Map to radial-angle sector membership:
 
 ```math
-r = \lVert z \rVert_2, \quad \theta = \operatorname{atan2}(z_2,z_1)
+r = \lVert z \rVert_2, \quad \theta = atan2(z_2,z_1)
 ```
 
 PSO local search inside each sector:
