@@ -19,7 +19,7 @@ This makes the method easier to explain, benchmark, and adapt to scientific or e
 
 ## Architecture
 
-![PathWoven-DCGO architecture](docs/assets/pathwoven_architecture.png)
+![PathWoven-DCGO architecture](docs/assets/pathwoven_architecture_final.webp)
 
 ## Representative applications
 
@@ -36,7 +36,7 @@ The architecture is not limited to toy benchmark functions. It is relevant where
 
 The benchmark panel below is formatted to read like a compact methods figure. The left panel compares final best-objective scores from the packaged Michalewicz smoke run; the right panel shows representative convergence behavior. For the score panel, **higher is better** because score = `- best objective`.
 
-![PathWoven-DCGO benchmark summary](docs/assets/pathwoven_benchmark.png)
+![PathWoven-DCGO benchmark summary](docs/assets/pathwoven_benchmark_final.webp)
 
 Smoke result from the installed package:
 
