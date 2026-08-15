@@ -1,61 +1,90 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
-  <title id="title">PathWoven-DCGO benchmark smoke result</title>
-  <desc id="desc">A clean benchmark comparison showing PathWoven Inside DCGO outperforming PSO and Simulated Annealing on a small Michalewicz smoke run.</desc>
-  <rect width="1200" height="620" fill="#ffffff"/>
-  <text x="60" y="64" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="700" fill="#111827">PathWoven-DCGO Benchmark Snapshot</text>
-  <text x="60" y="98" font-family="Inter, Arial, sans-serif" font-size="17" fill="#475569">Michalewicz smoke run, 3 runs. Higher score is better because score = -best objective.</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1300" height="760" viewBox="0 0 1300 760" role="img" aria-labelledby="title desc">
+  <title id="title">PathWoven-DCGO academic benchmark summary</title>
+  <desc id="desc">A clean academic benchmark panel with final score bars, representative convergence curves, and a compact results table for the Michalewicz smoke benchmark.</desc>
+  <defs>
+    <style>
+      .title{font-family:Arial,sans-serif;font-size:34px;font-weight:700;fill:#0f172a}
+      .subtitle{font-family:Arial,sans-serif;font-size:16px;fill:#475569}
+      .panel{fill:#ffffff;stroke:#cbd5e1;stroke-width:2}
+      .panelTitle{font-family:Arial,sans-serif;font-size:19px;font-weight:700;fill:#0f172a}
+      .text{font-family:Arial,sans-serif;font-size:14px;fill:#334155}
+      .small{font-family:Arial,sans-serif;font-size:12px;fill:#64748b}
+      .label{font-family:Arial,sans-serif;font-size:13px;fill:#475569}
+      .value{font-family:Arial,sans-serif;font-size:13px;font-weight:700;fill:#0f172a}
+      .mono{font-family:Courier New,monospace;font-size:12px;fill:#1e293b}
+    </style>
+  </defs>
+  <rect width="1300" height="760" fill="#ffffff"/>
+  <text x="650" y="48" text-anchor="middle" class="title">PathWoven-DCGO Benchmark Summary</text>
+  <text x="650" y="76" text-anchor="middle" class="subtitle">Michalewicz smoke benchmark. Final score = - best objective, so larger score indicates a lower objective value.</text>
 
-  <rect x="54" y="126" width="512" height="410" rx="18" fill="#f8fafc" stroke="#cbd5e1"/>
-  <text x="86" y="166" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="700" fill="#0f172a">Best Objective Score</text>
-  <text x="86" y="191" font-family="Inter, Arial, sans-serif" font-size="14" fill="#64748b">Score values from the packaged smoke benchmark.</text>
+  <rect x="55" y="115" width="380" height="440" rx="18" class="panel"/>
+  <text x="85" y="150" class="panelTitle">A. Final best-objective score</text>
+  <text x="85" y="174" class="small">3-run smoke benchmark; higher is better.</text>
+  <line x1="110" y1="480" x2="390" y2="480" stroke="#334155" stroke-width="1.5"/>
+  <line x1="110" y1="235" x2="110" y2="480" stroke="#334155" stroke-width="1.5"/>
+  <g stroke="#e2e8f0" stroke-width="1">
+    <line x1="110" y1="420" x2="390" y2="420"/>
+    <line x1="110" y1="360" x2="390" y2="360"/>
+    <line x1="110" y1="300" x2="390" y2="300"/>
+    <line x1="110" y1="240" x2="390" y2="240"/>
+  </g>
+  <text x="80" y="484" class="small">0</text><text x="80" y="424" class="small">1</text><text x="80" y="364" class="small">2</text><text x="80" y="304" class="small">3</text><text x="80" y="244" class="small">4</text>
+  <rect x="140" y="383" width="52" height="97" rx="6" fill="#94a3b8"/>
+  <rect x="230" y="246" width="52" height="234" rx="6" fill="#0f766e"/>
+  <rect x="320" y="237" width="52" height="243" rx="6" fill="#1d4ed8"/>
+  <text x="139" y="370" class="value">1.606</text><text x="229" y="233" class="value">3.896</text><text x="319" y="224" class="value">4.048</text>
+  <text x="128" y="510" class="label">SA</text>
+  <text x="222" y="510" class="label">PSO</text>
+  <text x="301" y="510" class="label">PathWoven</text>
+  <text x="306" y="528" class="label">DCGO</text>
+  <text x="82" y="548" class="small">Score axis: -mean(best objective)</text>
 
-  <line x1="112" y1="474" x2="520" y2="474" stroke="#334155" stroke-width="1.5"/>
-  <line x1="112" y1="232" x2="112" y2="474" stroke="#334155" stroke-width="1.5"/>
-  <text x="78" y="478" font-family="Inter, Arial, sans-serif" font-size="12" fill="#64748b">0</text>
-  <text x="72" y="418" font-family="Inter, Arial, sans-serif" font-size="12" fill="#64748b">1</text>
-  <text x="72" y="358" font-family="Inter, Arial, sans-serif" font-size="12" fill="#64748b">2</text>
-  <text x="72" y="298" font-family="Inter, Arial, sans-serif" font-size="12" fill="#64748b">3</text>
-  <text x="72" y="238" font-family="Inter, Arial, sans-serif" font-size="12" fill="#64748b">4</text>
-  <line x1="112" y1="414" x2="520" y2="414" stroke="#e2e8f0"/>
-  <line x1="112" y1="354" x2="520" y2="354" stroke="#e2e8f0"/>
-  <line x1="112" y1="294" x2="520" y2="294" stroke="#e2e8f0"/>
-  <line x1="112" y1="234" x2="520" y2="234" stroke="#e2e8f0"/>
+  <rect x="465" y="115" width="470" height="440" rx="18" class="panel"/>
+  <text x="495" y="150" class="panelTitle">B. Representative convergence behavior</text>
+  <text x="495" y="174" class="small">Lower best objective over iterations indicates progress.</text>
+  <line x1="535" y1="480" x2="890" y2="480" stroke="#334155" stroke-width="1.5"/>
+  <line x1="535" y1="235" x2="535" y2="480" stroke="#334155" stroke-width="1.5"/>
+  <g stroke="#e2e8f0" stroke-width="1">
+    <line x1="535" y1="420" x2="890" y2="420"/>
+    <line x1="535" y1="360" x2="890" y2="360"/>
+    <line x1="535" y1="300" x2="890" y2="300"/>
+    <line x1="535" y1="240" x2="890" y2="240"/>
+  </g>
+  <text x="510" y="484" class="small">0</text>
+  <text x="503" y="424" class="small">-1</text>
+  <text x="503" y="364" class="small">-2</text>
+  <text x="503" y="304" class="small">-3</text>
+  <text x="503" y="244" class="small">-4</text>
+  <text x="650" y="520" class="label">Iteration budget</text>
+  <text x="475" y="377" class="label" transform="rotate(-90 475 377)">Best objective value</text>
+  <polyline points="545,455 595,437 645,420 695,400 745,382 795,365 845,350 885,338" fill="none" stroke="#94a3b8" stroke-width="3.5" stroke-dasharray="8 7"/>
+  <polyline points="545,450 595,405 645,365 695,330 745,305 795,287 845,272 885,263" fill="none" stroke="#0f766e" stroke-width="3.5"/>
+  <polyline points="545,448 595,395 645,345 695,306 745,282 795,264 845,251 885,238" fill="none" stroke="#1d4ed8" stroke-width="4.5"/>
+  <circle cx="560" cy="575" r="6" fill="#1d4ed8"/><text x="575" y="580" class="label">PathWoven Inside DCGO</text>
+  <circle cx="760" cy="575" r="6" fill="#0f766e"/><text x="775" y="580" class="label">PSO</text>
+  <circle cx="835" cy="575" r="6" fill="#94a3b8"/><text x="850" y="580" class="label">SA</text>
 
-  <rect x="150" y="377.6" width="76" height="96.4" rx="8" fill="#94a3b8"/>
-  <rect x="290" y="240.2" width="76" height="233.8" rx="8" fill="#0f766e"/>
-  <rect x="430" y="231.1" width="76" height="242.9" rx="8" fill="#1d4ed8"/>
+  <rect x="965" y="115" width="280" height="440" rx="18" class="panel"/>
+  <text x="995" y="150" class="panelTitle">C. Smoke result table</text>
+  <text x="995" y="174" class="small">Installed package run, 3 trials.</text>
+  <rect x="995" y="205" width="220" height="40" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="1010" y="230" class="value">Method</text><text x="1150" y="230" class="value">Score</text>
+  <rect x="995" y="245" width="220" height="48" fill="#ffffff" stroke="#e2e8f0"/>
+  <text x="1010" y="273" class="text">SA</text><text x="1152" y="273" class="text">1.606</text>
+  <rect x="995" y="293" width="220" height="48" fill="#ffffff" stroke="#e2e8f0"/>
+  <text x="1010" y="321" class="text">PSO</text><text x="1152" y="321" class="text">3.896</text>
+  <rect x="995" y="341" width="220" height="58" fill="#f8fafc" stroke="#bfdbfe"/>
+  <text x="1010" y="367" class="text">PathWoven</text><text x="1010" y="385" class="text">Inside DCGO</text><text x="1152" y="376" class="value">4.048</text>
+  <text x="995" y="435" class="text">Preliminary interpretation:</text>
+  <text x="995" y="458" class="small">PathWoven Inside DCGO</text>
+  <text x="995" y="476" class="small">achieved the strongest score</text>
+  <text x="995" y="494" class="small">in this packaged smoke run.</text>
+  <text x="995" y="528" class="small">Full claims require matched</text>
+  <text x="995" y="546" class="small">budgets, repeated seeds, and</text>
+  <text x="995" y="564" class="small">formal statistical tests.</text>
 
-  <text x="144" y="505" font-family="Inter, Arial, sans-serif" font-size="13" fill="#334155">Simulated</text>
-  <text x="148" y="522" font-family="Inter, Arial, sans-serif" font-size="13" fill="#334155">Annealing</text>
-  <text x="314" y="505" font-family="Inter, Arial, sans-serif" font-size="13" fill="#334155">PSO</text>
-  <text x="414" y="505" font-family="Inter, Arial, sans-serif" font-size="13" fill="#334155">PathWoven</text>
-  <text x="420" y="522" font-family="Inter, Arial, sans-serif" font-size="13" fill="#334155">Inside DCGO</text>
-
-  <text x="150" y="364" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#334155">1.606</text>
-  <text x="292" y="226" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#0f766e">3.896</text>
-  <text x="432" y="217" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#1d4ed8">4.048</text>
-
-  <rect x="624" y="126" width="522" height="410" rx="18" fill="#f8fafc" stroke="#cbd5e1"/>
-  <text x="656" y="166" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="700" fill="#0f172a">Convergence Behavior</text>
-  <text x="656" y="191" font-family="Inter, Arial, sans-serif" font-size="14" fill="#64748b">Representative convergence trace for the intended benchmark harness.</text>
-
-  <line x1="690" y1="474" x2="1090" y2="474" stroke="#334155" stroke-width="1.5"/>
-  <line x1="690" y1="232" x2="690" y2="474" stroke="#334155" stroke-width="1.5"/>
-  <text x="682" y="505" font-family="Inter, Arial, sans-serif" font-size="13" fill="#475569">start</text>
-  <text x="1058" y="505" font-family="Inter, Arial, sans-serif" font-size="13" fill="#475569">finish</text>
-  <text x="646" y="250" font-family="Inter, Arial, sans-serif" font-size="12" fill="#64748b">high</text>
-  <text x="650" y="478" font-family="Inter, Arial, sans-serif" font-size="12" fill="#64748b">low</text>
-  <text x="778" y="535" font-family="Inter, Arial, sans-serif" font-size="13" fill="#64748b">Iteration budget</text>
-  <text x="616" y="370" font-family="Inter, Arial, sans-serif" font-size="13" fill="#64748b" transform="rotate(-90 616 370)">Best objective value</text>
-
-  <polyline points="700,260 760,294 820,327 880,356 940,389 1000,426 1080,456" fill="none" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 7"/>
-  <polyline points="700,258 760,284 820,310 880,333 940,360 1000,392 1080,425" fill="none" stroke="#0f766e" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <polyline points="700,256 760,292 820,338 880,384 940,420 1000,449 1080,468" fill="none" stroke="#1d4ed8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <circle cx="720" cy="566" r="6" fill="#1d4ed8"/><text x="736" y="571" font-family="Inter, Arial, sans-serif" font-size="14" fill="#334155">PathWoven Inside DCGO</text>
-  <circle cx="918" cy="566" r="6" fill="#0f766e"/><text x="934" y="571" font-family="Inter, Arial, sans-serif" font-size="14" fill="#334155">PSO</text>
-  <circle cx="986" cy="566" r="6" fill="#94a3b8"/><text x="1002" y="571" font-family="Inter, Arial, sans-serif" font-size="14" fill="#334155">SA</text>
-
-  <rect x="60" y="558" width="510" height="34" rx="12" fill="#eff6ff" stroke="#bfdbfe"/>
-  <text x="82" y="581" font-family="Inter, Arial, sans-serif" font-size="14" fill="#1e3a8a">Smoke result: PathWoven Inside DCGO reached the strongest best-objective score in this packaged run.</text>
+  <rect x="55" y="610" width="1190" height="90" rx="18" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="85" y="642" class="panelTitle">Recommended academic evidence stack</text>
+  <text x="85" y="670" class="text">Matched evaluation budgets • repeated seeds • mean ± standard deviation • convergence traces • ANOVA / post-hoc tests • dimension-scaled benchmark matrix</text>
 </svg>
