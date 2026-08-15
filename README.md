@@ -1,16 +1,42 @@
 # PathWoven-DCGO
 
-**PathWoven-DCGO** is a geometry-guided hybrid optimization framework for hard nonconvex search. It combines pizza-slice geometric decomposition, Particle Swarm Optimization inside local sectors, and Simulated Annealing-style global refinement.
+**PathWoven-DCGO** is a geometry-guided hybrid optimization framework for hard nonconvex search. It combines pizza-slice geometric decomposition, Particle Swarm Optimization inside local sectors, Simulated Annealing-style global refinement, and a DCGO coordination layer for structured exploration and exploitation.
 
-The algorithm is designed as a research reference for rugged benchmark functions such as Michalewicz, Rastrigin, Rosenbrock, Ackley, and Sphere.
+The repository is intended as an **academic reference implementation** for rugged benchmark functions such as Michalewicz, Rastrigin, Rosenbrock, Ackley, and Sphere.
 
 > Status: reference implementation with tests and a benchmark harness. Do not claim universal superiority without repeated runs across dimensions, seeds, budgets, and statistical tests.
 
-## Benchmark snapshot
+## Why this architecture matters
 
-The packaged smoke benchmark below compares Simulated Annealing, Particle Swarm Optimization, and PathWoven Inside DCGO on Michalewicz. The plotted score is `-best objective`, so higher is better.
+PathWoven-DCGO is designed for optimization settings in which a direct global search is unstable, expensive, or too prone to premature convergence. The central idea is to impose **geometric structure** on a difficult search space and then combine:
 
-![PathWoven-DCGO benchmark snapshot](docs/assets/smoke_benchmark.svg)
+- **PathWoven decomposition** to partition a rugged domain into local windows,
+- **PSO** to perform coordinated local search inside each window,
+- **Simulated Annealing** to preserve controlled exploration,
+- **DCGO coordination** to share information across sectors and retain strong candidate paths.
+
+This makes the method easier to explain, benchmark, and adapt to scientific or engineering problems where the search surface is highly nonconvex.
+
+## Architecture
+
+![PathWoven-DCGO architecture](docs/assets/pathwoven_architecture.svg)
+
+## Representative applications
+
+The architecture is not limited to toy benchmark functions. It is relevant wherever one must search a rugged objective landscape under constraints.
+
+- **Robotics and motion planning** — multi-stage path generation, collision-aware route refinement, and constrained maneuver planning.
+- **Logistics and scheduling** — route optimization, dispatch planning, and task sequencing under bounded resources.
+- **Manufacturing and assembly planning** — process ordering, tool-path refinement, and production workflow optimization.
+- **Network reconfiguration** — topology adaptation, fault-aware routing, and state-transition optimization.
+- **Legal / compliance workflow optimization** — sequencing constrained decision steps and policy-aware workflow design.
+- **Scientific transition-path problems** — rugged energy or objective landscapes arising in physics, chemistry, and computational science.
+
+## Benchmark summary
+
+The benchmark panel below is formatted to read like a compact methods figure. The left panel compares final best-objective scores from the packaged Michalewicz smoke run; the right panel shows representative convergence behavior. For the score panel, **higher is better** because score = `- best objective`.
+
+![PathWoven-DCGO benchmark summary](docs/assets/smoke_benchmark.svg)
 
 Smoke result from the installed package:
 
@@ -20,7 +46,7 @@ Smoke result from the installed package:
 | Particle Swarm Optimization | 3 | -3.89602 | 3.896 |
 | PathWoven Inside DCGO | 3 | -4.04754 | 4.048 |
 
-For serious claims, run the full benchmark matrix with more seeds, dimensions, and iteration budgets.
+**Interpretation.** In this packaged smoke benchmark, PathWoven Inside DCGO achieved the strongest final best-objective score. This is only a preliminary demonstration. Serious comparative claims should use more runs, more seeds, multiple dimensions, matched evaluation budgets, and formal statistical analysis.
 
 ## Core idea
 
@@ -29,11 +55,11 @@ problem landscape -> circular domain mapping -> pizza-slice sectors -> rectangul
                  -> PSO flock search inside each sector -> SA global refinement -> best solution x*
 ```
 
-The pizza intuition is the same geometry behind the circle-area identity:
+The motivating geometry comes from the circle-area intuition:
 
 ```text
 circle -> thin slices -> rectangular strip
-area ≈ (πr) · r = πr²
+area ≈ (pi*r) * r = pi*r^2
 ```
 
 In optimization, this becomes:
@@ -42,34 +68,25 @@ In optimization, this becomes:
 curved / rugged domain -> sector windows -> coordinated local search
 ```
 
-## Equations
+## Working formulas
 
-Normalize a candidate vector:
+The README deliberately uses GitHub-safe notation instead of fragile Markdown math macros.
 
-```math
-z = 2\frac{x-l}{u-l} - 1
-```
+```text
+Normalize candidate:
+z = 2 * (x - lower) / (upper - lower) - 1
 
-Map to radial-angle sector membership:
+Radial-angle membership:
+r = norm(z, 2)
+theta = atan2(z2, z1)
 
-```math
-r = \lVert z \rVert_2, \quad \theta = atan2(z_2,z_1)
-```
-
-PSO local search inside each sector:
-
-```math
-v_i(t+1)=\omega v_i(t)+c_1\rho_1(p_i-x_i)+c_2\rho_2(g_k-x_i)+c_3\rho_3(g-x_i)
-```
-
-```math
-x_i(t+1)=x_i(t)+v_i(t+1)
-```
+PSO update inside sector k:
+v_i(t+1) = w*v_i(t) + c1*r1*(p_i - x_i) + c2*r2*(g_k - x_i) + c3*r3*(g - x_i)
+x_i(t+1) = x_i(t) + v_i(t+1)
 
 Annealed acceptance:
-
-```math
-P=\exp(-\Delta E/T), \quad T_{t+1}=\alpha T_t
+P_accept = exp(-delta_E / T)
+T_next = alpha * T
 ```
 
 ## Install
@@ -90,7 +107,7 @@ pip install -e .[dev]
 pytest -q
 ```
 
-Expected local validation from the first packaged version:
+Expected local validation from the packaged version:
 
 ```text
 12 passed
@@ -123,9 +140,9 @@ examples/          # benchmark CLI
 docs/              # formal algorithm specification
 ```
 
-## Why this fixes the earlier plotting/statistics issue
+## Why this addresses the earlier plotting/statistics failure
 
-The benchmark harness pads convergence logs to a uniform length before plotting and rejects empty statistical samples before summarization. That prevents errors like:
+The benchmark harness pads convergence logs to a uniform length before plotting and rejects empty statistical samples before summarization. That prevents errors such as:
 
 ```text
 ValueError: x and y must have same first dimension
