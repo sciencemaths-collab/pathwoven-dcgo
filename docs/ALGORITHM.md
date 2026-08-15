@@ -1,0 +1,121 @@
+# PathWoven-DCGO Algorithm Specification
+
+## 1. Purpose
+
+PathWoven-DCGO is a hybrid optimization technique for hard nonconvex objective functions. It is inspired by the geometric transformation used to understand the circle-area identity \(A=\pi r^2\): slice a circular domain into thin sectors, then rearrange the sectors into a nearly rectangular structure.
+
+In this optimizer, the same geometric idea decomposes a rugged search region into tractable local windows. Particle Swarm Optimization performs coordinated search inside each window, while a Simulated Annealing controller manages exploration, sector refinement, and cross-sector transitions.
+
+## 2. Modules
+
+### 2.1 Problem landscape
+
+The optimizer accepts an objective function \(f(x)\), lower and upper bounds, an iteration budget, a sector count, and particles per sector.
+
+```math
+\min_{x \in [l,u]^d} f(x)
+```
+
+### 2.2 Circular domain mapping
+
+The search domain is normalized:
+
+```math
+z = 2\frac{x-l}{u-l} - 1
+```
+
+The first two normalized coordinates define angular sector membership:
+
+```math
+\theta = \operatorname{atan2}(z_2,z_1)
+```
+
+For higher-dimensional problems, this angular projection acts as a coordination layer, not a full dimensionality reduction.
+
+### 2.3 Pizza-slice decomposition
+
+The angular domain is partitioned into \(K\) sectors:
+
+```math
+S_k = [2\pi k/K, 2\pi(k+1)/K)
+```
+
+Each sector receives a sub-swarm.
+
+### 2.4 PathWoven rearrangement
+
+A sector is treated as a local rectangular search window:
+
+```text
+circle -> slices -> rectangular strip
+```
+
+This does not claim the objective becomes convex. It creates a disciplined structure for parallel local exploration.
+
+### 2.5 PSO local search
+
+For particle \(i\):
+
+```math
+v_i(t+1) = \omega v_i(t) + c_1\rho_1(p_i-x_i) + c_2\rho_2(g_k-x_i) + c_3\rho_3(g-x_i)
+```
+
+where \(p_i\) is particle best, \(g_k\) is sector best, and \(g\) is global best.
+
+### 2.6 Annealed refinement
+
+The SA controller accepts exploratory moves with:
+
+```math
+P = \exp(-\Delta E/T)
+```
+
+The temperature decreases according to:
+
+```math
+T_{t+1}=\alpha T_t
+```
+
+This lets the optimizer behave like a wide-search flock early and a disciplined local solver late.
+
+## 3. Pseudocode
+
+```text
+Input: objective f, bounds [l,u], sectors K, particles per sector M, iterations T
+Initialize K x M particles across domain
+Assign particles to angular sectors
+Evaluate objective values
+Store particle, sector, and global bests
+
+for t = 1..T:
+    for each sector k:
+        update sector best g_k
+
+    for each particle i in sector k:
+        compute PSO velocity using particle best, sector best, and global best
+        propose candidate position
+        add annealed PathWoven jitter proportional to temperature
+        accept candidate if better or by exp(-delta/T)
+        update particle best
+
+    update global best
+    recompute sector membership from radial-angle projection
+    cool temperature
+    record convergence
+
+return best solution, best objective value, convergence trace, metadata
+```
+
+## 4. Benchmark plan
+
+| Function | Dimensions | Runs | Iterations | Purpose |
+|---|---:|---:|---:|---|
+| Sphere | 2, 5, 10 | 30 | 300 | sanity check |
+| Rastrigin | 2, 5, 10 | 30 | 500 | multimodal stress test |
+| Rosenbrock | 2, 5, 10 | 30 | 1000 | curved valley behavior |
+| Ackley | 2, 5, 10 | 30 | 500 | rugged global basin |
+| Michalewicz | 2, 5, 10 | 30 | 1000 | deceptive landscape |
+
+## 5. Validation rules
+
+A serious performance claim requires identical budgets, run counts, seeds, dimensions, and statistical summaries. The repository includes guardrails that reject empty statistical samples and pad convergence traces to avoid plotting shape mismatches.
