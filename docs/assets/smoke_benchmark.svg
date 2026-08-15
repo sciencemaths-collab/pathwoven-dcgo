@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">PathWoven-DCGO benchmark smoke result</title>
+  <desc id="desc">A clean benchmark comparison showing PathWoven Inside DCGO outperforming PSO and Simulated Annealing on a small Michalewicz smoke run.</desc>
+  <rect width="1200" height="620" fill="#ffffff"/>
+  <text x="60" y="64" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="700" fill="#111827">PathWoven-DCGO Benchmark Snapshot</text>
+  <text x="60" y="98" font-family="Inter, Arial, sans-serif" font-size="17" fill="#475569">Michalewicz smoke run, 3 runs. Higher score is better because score = -best objective.</text>
+
+  <rect x="54" y="126" width="512" height="410" rx="18" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="86" y="166" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="700" fill="#0f172a">Best Objective Score</text>
+  <text x="86" y="191" font-family="Inter, Arial, sans-serif" font-size="14" fill="#64748b">Score values from the packaged smoke benchmark.</text>
+
+  <line x1="112" y1="474" x2="520" y2="474" stroke="#334155" stroke-width="1.5"/>
+  <line x1="112" y1="232" x2="112" y2="474" stroke="#334155" stroke-width="1.5"/>
+  <text x="78" y="478" font-family="Inter, Arial, sans-serif" font-size="12" fill="#64748b">0</text>
+  <text x="72" y="418" font-family="Inter, Arial, sans-serif" font-size="12" fill="#64748b">1</text>
+  <text x="72" y="358" font-family="Inter, Arial, sans-serif" font-size="12" fill="#64748b">2</text>
+  <text x="72" y="298" font-family="Inter, Arial, sans-serif" font-size="12" fill="#64748b">3</text>
+  <text x="72" y="238" font-family="Inter, Arial, sans-serif" font-size="12" fill="#64748b">4</text>
+  <line x1="112" y1="414" x2="520" y2="414" stroke="#e2e8f0"/>
+  <line x1="112" y1="354" x2="520" y2="354" stroke="#e2e8f0"/>
+  <line x1="112" y1="294" x2="520" y2="294" stroke="#e2e8f0"/>
+  <line x1="112" y1="234" x2="520" y2="234" stroke="#e2e8f0"/>
+
+  <rect x="150" y="377.6" width="76" height="96.4" rx="8" fill="#94a3b8"/>
+  <rect x="290" y="240.2" width="76" height="233.8" rx="8" fill="#0f766e"/>
+  <rect x="430" y="231.1" width="76" height="242.9" rx="8" fill="#1d4ed8"/>
+
+  <text x="144" y="505" font-family="Inter, Arial, sans-serif" font-size="13" fill="#334155">Simulated</text>
+  <text x="148" y="522" font-family="Inter, Arial, sans-serif" font-size="13" fill="#334155">Annealing</text>
+  <text x="314" y="505" font-family="Inter, Arial, sans-serif" font-size="13" fill="#334155">PSO</text>
+  <text x="414" y="505" font-family="Inter, Arial, sans-serif" font-size="13" fill="#334155">PathWoven</text>
+  <text x="420" y="522" font-family="Inter, Arial, sans-serif" font-size="13" fill="#334155">Inside DCGO</text>
+
+  <text x="150" y="364" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#334155">1.606</text>
+  <text x="292" y="226" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#0f766e">3.896</text>
+  <text x="432" y="217" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#1d4ed8">4.048</text>
+
+  <rect x="624" y="126" width="522" height="410" rx="18" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="656" y="166" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="700" fill="#0f172a">Convergence Behavior</text>
+  <text x="656" y="191" font-family="Inter, Arial, sans-serif" font-size="14" fill="#64748b">Representative convergence trace for the intended benchmark harness.</text>
+
+  <line x1="690" y1="474" x2="1090" y2="474" stroke="#334155" stroke-width="1.5"/>
+  <line x1="690" y1="232" x2="690" y2="474" stroke="#334155" stroke-width="1.5"/>
+  <text x="682" y="505" font-family="Inter, Arial, sans-serif" font-size="13" fill="#475569">start</text>
+  <text x="1058" y="505" font-family="Inter, Arial, sans-serif" font-size="13" fill="#475569">finish</text>
+  <text x="646" y="250" font-family="Inter, Arial, sans-serif" font-size="12" fill="#64748b">high</text>
+  <text x="650" y="478" font-family="Inter, Arial, sans-serif" font-size="12" fill="#64748b">low</text>
+  <text x="778" y="535" font-family="Inter, Arial, sans-serif" font-size="13" fill="#64748b">Iteration budget</text>
+  <text x="616" y="370" font-family="Inter, Arial, sans-serif" font-size="13" fill="#64748b" transform="rotate(-90 616 370)">Best objective value</text>
+
+  <polyline points="700,260 760,294 820,327 880,356 940,389 1000,426 1080,456" fill="none" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 7"/>
+  <polyline points="700,258 760,284 820,310 880,333 940,360 1000,392 1080,425" fill="none" stroke="#0f766e" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="700,256 760,292 820,338 880,384 940,420 1000,449 1080,468" fill="none" stroke="#1d4ed8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <circle cx="720" cy="566" r="6" fill="#1d4ed8"/><text x="736" y="571" font-family="Inter, Arial, sans-serif" font-size="14" fill="#334155">PathWoven Inside DCGO</text>
+  <circle cx="918" cy="566" r="6" fill="#0f766e"/><text x="934" y="571" font-family="Inter, Arial, sans-serif" font-size="14" fill="#334155">PSO</text>
+  <circle cx="986" cy="566" r="6" fill="#94a3b8"/><text x="1002" y="571" font-family="Inter, Arial, sans-serif" font-size="14" fill="#334155">SA</text>
+
+  <rect x="60" y="558" width="510" height="34" rx="12" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="82" y="581" font-family="Inter, Arial, sans-serif" font-size="14" fill="#1e3a8a">Smoke result: PathWoven Inside DCGO reached the strongest best-objective score in this packaged run.</text>
+</svg>
