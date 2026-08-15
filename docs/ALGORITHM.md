@@ -2,11 +2,11 @@
 
 ## 1. Purpose
 
-PathWoven-DCGO is a hybrid optimization technique for hard nonconvex objective functions. It is inspired by the geometric transformation used to understand the circle-area identity `A = pi*r^2`: slice a circular domain into thin sectors, then rearrange the sectors into a nearly rectangular structure.
+PathWoven-DCGO is a hybrid optimization technique for hard nonconvex objective functions. It is inspired by the geometric transformation used to explain the circle-area identity `A = pi*r^2`: slice a circular domain into thin sectors, then rearrange the sectors into a nearly rectangular structure.
 
 In this optimizer, the same geometric idea decomposes a rugged search region into tractable local windows. Particle Swarm Optimization performs coordinated search inside each window, while a Simulated Annealing controller manages exploration, sector refinement, and cross-sector transitions.
 
-## 2. Modules
+## 2. Conceptual modules
 
 ### 2.1 Problem landscape
 
@@ -79,6 +79,17 @@ T_next = alpha * T
 
 This lets the optimizer behave like a wide-search flock early and a disciplined local solver late.
 
+### 2.7 DCGO coordination layer
+
+The DCGO layer acts above the local swarms. Its role is to:
+
+- rank promising sectors,
+- propagate strong information across local windows,
+- retain best-path candidates,
+- permit adaptive updates to sector emphasis.
+
+This makes the algorithm more than a simple PSO-in-a-box scheme; it becomes a coordinated hybrid search architecture.
+
 ## 3. Pseudocode
 
 ```text
@@ -117,6 +128,26 @@ return best solution, best objective value, convergence trace, metadata
 | Ackley | 2, 5, 10 | 30 | 500 | rugged global basin |
 | Michalewicz | 2, 5, 10 | 30 | 1000 | deceptive landscape |
 
-## 5. Validation rules
+## 5. Application domains
+
+PathWoven-DCGO is suitable wherever the search problem is high-cost, rugged, constrained, or transition-oriented. Representative targets include:
+
+- robotics and motion planning,
+- logistics and scheduling,
+- manufacturing and assembly planning,
+- network reconfiguration,
+- legal or compliance workflow optimization,
+- scientific transition-path problems in physics, chemistry, and computational science.
+
+## 6. Validation rules
 
 A serious performance claim requires identical budgets, run counts, seeds, dimensions, and statistical summaries. The repository includes guardrails that reject empty statistical samples and pad convergence traces to avoid plotting shape mismatches.
+
+For an academic presentation, the recommended evidence stack is:
+
+1. matched benchmark budgets,
+2. repeated seeds,
+3. convergence traces,
+4. summary tables of final best values,
+5. ANOVA or equivalent omnibus testing,
+6. pairwise post-hoc comparisons where justified.
