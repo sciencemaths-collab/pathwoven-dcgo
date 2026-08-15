@@ -2,9 +2,13 @@
 
 **PathWoven-DCGO** is a geometry-guided hybrid optimization framework for hard nonconvex search. It combines pizza-slice geometric decomposition, Particle Swarm Optimization inside local sectors, and Simulated Annealing-style global refinement.
 
-The algorithm is designed as a research reference for rugged benchmark functions such as Michalewicz, Rastrigin, Rosenbrock, Ackley, and Sphere.
+The repository is designed as a research reference for rugged benchmark functions such as Michalewicz, Rastrigin, Rosenbrock, Ackley, and Sphere.
 
 > Status: reference implementation with tests and a benchmark harness. Do not claim universal superiority without repeated runs across dimensions, seeds, budgets, and statistical tests.
+
+## Architecture
+
+![PathWoven-DCGO architecture](docs/assets/pathwoven_architecture.svg)
 
 ## Benchmark snapshot
 
@@ -42,34 +46,25 @@ In optimization, this becomes:
 curved / rugged domain -> sector windows -> coordinated local search
 ```
 
-## Equations
+## GitHub-safe formulas
 
-Normalize a candidate vector:
+The README avoids unsupported Markdown math macros, so it renders cleanly on GitHub.
 
-```math
-z = 2\frac{x-l}{u-l} - 1
-```
+```text
+Normalize candidate:
+z = 2 * (x - lower) / (upper - lower) - 1
 
-Map to radial-angle sector membership:
+Radial-angle membership:
+r = norm(z, 2)
+theta = atan2(z2, z1)
 
-```math
-r = \lVert z \rVert_2, \quad \theta = atan2(z_2,z_1)
-```
-
-PSO local search inside each sector:
-
-```math
-v_i(t+1)=\omega v_i(t)+c_1\rho_1(p_i-x_i)+c_2\rho_2(g_k-x_i)+c_3\rho_3(g-x_i)
-```
-
-```math
-x_i(t+1)=x_i(t)+v_i(t+1)
-```
+PSO update inside sector k:
+v_i(t+1) = w*v_i(t) + c1*r1*(p_i - x_i) + c2*r2*(g_k - x_i) + c3*r3*(g - x_i)
+x_i(t+1) = x_i(t) + v_i(t+1)
 
 Annealed acceptance:
-
-```math
-P=\exp(-\Delta E/T), \quad T_{t+1}=\alpha T_t
+P_accept = exp(-delta_E / T)
+T_next = alpha * T
 ```
 
 ## Install
