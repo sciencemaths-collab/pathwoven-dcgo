@@ -27,7 +27,7 @@ z = 2\frac{x-l}{u-l} - 1
 The first two normalized coordinates define angular sector membership:
 
 ```math
-\theta = \operatorname{atan2}(z_2,z_1)
+\theta = atan2(z_2,z_1)
 ```
 
 For higher-dimensional problems, this angular projection acts as a coordination layer, not a full dimensionality reduction.
