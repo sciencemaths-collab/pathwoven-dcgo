@@ -2,7 +2,7 @@
 
 ## 1. Purpose
 
-PathWoven-DCGO is a hybrid optimization technique for hard nonconvex objective functions. It is inspired by the geometric transformation used to understand the circle-area identity \(A=\pi r^2\): slice a circular domain into thin sectors, then rearrange the sectors into a nearly rectangular structure.
+PathWoven-DCGO is a hybrid optimization technique for hard nonconvex objective functions. It is inspired by the geometric transformation used to understand the circle-area identity `A = pi*r^2`: slice a circular domain into thin sectors, then rearrange the sectors into a nearly rectangular structure.
 
 In this optimizer, the same geometric idea decomposes a rugged search region into tractable local windows. Particle Swarm Optimization performs coordinated search inside each window, while a Simulated Annealing controller manages exploration, sector refinement, and cross-sector transitions.
 
@@ -10,34 +10,34 @@ In this optimizer, the same geometric idea decomposes a rugged search region int
 
 ### 2.1 Problem landscape
 
-The optimizer accepts an objective function \(f(x)\), lower and upper bounds, an iteration budget, a sector count, and particles per sector.
+The optimizer accepts an objective function `f(x)`, lower and upper bounds, an iteration budget, a sector count, and particles per sector.
 
-```math
-\min_{x \in [l,u]^d} f(x)
+```text
+minimize f(x), where x is inside the bounded domain [lower, upper]^d
 ```
 
 ### 2.2 Circular domain mapping
 
 The search domain is normalized:
 
-```math
-z = 2\frac{x-l}{u-l} - 1
+```text
+z = 2 * (x - lower) / (upper - lower) - 1
 ```
 
 The first two normalized coordinates define angular sector membership:
 
-```math
-\theta = atan2(z_2,z_1)
+```text
+theta = atan2(z2, z1)
 ```
 
 For higher-dimensional problems, this angular projection acts as a coordination layer, not a full dimensionality reduction.
 
 ### 2.3 Pizza-slice decomposition
 
-The angular domain is partitioned into \(K\) sectors:
+The angular domain is partitioned into `K` sectors:
 
-```math
-S_k = [2\pi k/K, 2\pi(k+1)/K)
+```text
+S_k = [2*pi*k/K, 2*pi*(k+1)/K)
 ```
 
 Each sector receives a sub-swarm.
@@ -54,26 +54,27 @@ This does not claim the objective becomes convex. It creates a disciplined struc
 
 ### 2.5 PSO local search
 
-For particle \(i\):
+For particle `i`:
 
-```math
-v_i(t+1) = \omega v_i(t) + c_1\rho_1(p_i-x_i) + c_2\rho_2(g_k-x_i) + c_3\rho_3(g-x_i)
+```text
+v_i(t+1) = w*v_i(t) + c1*r1*(p_i - x_i) + c2*r2*(g_k - x_i) + c3*r3*(g - x_i)
+x_i(t+1) = x_i(t) + v_i(t+1)
 ```
 
-where \(p_i\) is particle best, \(g_k\) is sector best, and \(g\) is global best.
+where `p_i` is particle best, `g_k` is sector best, and `g` is global best.
 
 ### 2.6 Annealed refinement
 
 The SA controller accepts exploratory moves with:
 
-```math
-P = \exp(-\Delta E/T)
+```text
+P_accept = exp(-delta_E / T)
 ```
 
 The temperature decreases according to:
 
-```math
-T_{t+1}=\alpha T_t
+```text
+T_next = alpha * T
 ```
 
 This lets the optimizer behave like a wide-search flock early and a disciplined local solver late.
@@ -81,7 +82,7 @@ This lets the optimizer behave like a wide-search flock early and a disciplined 
 ## 3. Pseudocode
 
 ```text
-Input: objective f, bounds [l,u], sectors K, particles per sector M, iterations T
+Input: objective f, bounds [lower, upper], sectors K, particles per sector M, iterations T
 Initialize K x M particles across domain
 Assign particles to angular sectors
 Evaluate objective values
